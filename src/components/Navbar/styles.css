@@ -7,3 +7,7 @@
 .nav-logo-text {
   color: #fff;
 }
+
+.nav-logo-text h4 {
+  margin: 0;
+}

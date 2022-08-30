@@ -2,21 +2,22 @@ import './styles.css';
 
 import ResultCard from 'components/ResultCard';
 
-const CepSearch = () => {
+const GitHubSearch = () => {
   return (
-    <div className="cep-search-container">
-      <h1 className="text-primary">Busca CEP</h1>
+    <div className="github-search-container">
       <div className="container search-container">
+        <h1>Encontre um perfil GitHub</h1>
+
         <form>
           <div className="form-container">
             <input
               type="text"
               className="search-input"
-              placeholder="CEP (somente números)"
+              placeholder="Usuário GitHub"
               onChange={() => {}}
             />
             <button type="submit" className="btn btn-primary search-button">
-              Buscar
+              Encontrar
             </button>
           </div>
         </form>
@@ -29,4 +30,4 @@ const CepSearch = () => {
   );
 };
 
-export default CepSearch;
+export default GitHubSearch;

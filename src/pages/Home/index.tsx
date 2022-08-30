@@ -12,7 +12,7 @@ const Home = () => {
             </div>
 
 
-            <Link to="/cepsearch">
+            <Link to="/githubsearch">
                 <button className="btn btn-primary btn-lg start-button">Começar</button>
             </Link>
         </div>
