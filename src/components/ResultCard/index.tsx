@@ -3,14 +3,18 @@ import './styles.css';
 type Props = {
     title: string;
     description: string;
+    link: boolean
 }
 
-const ResultCard = ( { title, description} : Props) => {
+const ResultCard = ( { title, description, link } : Props) => {
 
     return (
         <div className="result-container">
-            <h3 className="result-title">{title}</h3>
-            <p className="result-description">{description}</p>
+            <h3 className="result-title">{ title }:&nbsp;</h3>
+            {link
+                ? <a href={ description } className="link-description" > { description }</a>
+                : <p className="result-description">{ description }</p>
+            }
         </div>
     );
 }

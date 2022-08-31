@@ -28,7 +28,7 @@ const GitHubSearch = () => {
       <div className="container  github-info-card">
 
         <div className="github-image-container">
-          <ImageCard />
+          <ImageCard url='https://avatars.githubusercontent.com/u/13897257?v=4' profileName='Prof Nelius' />
         </div>
 
         <div className="container  github-all-info-container">

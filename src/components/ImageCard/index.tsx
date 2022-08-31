@@ -1,9 +1,14 @@
 import './styles.css';
 
-const ImageCard = () => {
+type Props = {
+    url: string;
+    profileName: string
+}
+
+const ImageCard = ({ url, profileName }: Props) => {
     return (
         <div className="image-container">
-            <img src="https://avatars.githubusercontent.com/u/13897257?v=4" alt="Imagem do perfil" />
+            <img src={ url } alt={ profileName } />
         </div>
     )
 }
