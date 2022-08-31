@@ -4,18 +4,29 @@ import ResultCard from 'components/ResultCard';
 import ImageCard from 'components/ImageCard';
 
 const GitHubSearch = () => {
+
+  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    console.log("Mudou para: " + event.target.value);
+  };
+
+  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+
+    console.log("Clicou no botão");
+  };
+
   return (
     <div className="github-search-container">
       <div className="container  search-container">
         <h1>Encontre um perfil GitHub</h1>
 
-        <form>
+        <form onSubmit={ handleSubmit }>
           <div className="form-container">
             <input
               type="text"
               className="search-input"
               placeholder="Usuário GitHub"
-              onChange={() => {}}
+              onChange={ handleChange }
             />
 
             <button type="submit" className="btn btn-primary search-button">
