@@ -25,6 +25,7 @@
   background-color: #E6F7FF;
   border-radius: 5px;
   border-radius: 16px;
+  margin-bottom: 55px;
 }
 
 .form-container {
@@ -56,9 +57,37 @@
   color: #fff;
 }
 
+.github-info-card {
+  display: flex;
+  flex-direction: row;
+  padding: 40px;
+  background-color: #F5F5F5;
+  border-radius: 5px;
+  border-radius: 16px;
+  margin-bottom: 55px;
+}
+
+.github-image-container {
+  margin-right: 10px;
+}
+
+.info-title h3 {
+  font-size: 20px;
+  color: #1890FF;
+}
+
+.github-all-info-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 10px 15px 15px 15px;
+  background-color: #fff;
+  border: 1px solid #D9D9D9;
+  border-radius: 6px;
+}
 
 @media (min-width: 576px) {
     .search-input {
-        width: 480px;
+        width: 300px;
     }
 }
