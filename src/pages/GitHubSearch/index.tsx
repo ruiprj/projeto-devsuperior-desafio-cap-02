@@ -2,17 +2,29 @@ import './styles.css';
 
 import ResultCard from 'components/ResultCard';
 import ImageCard from 'components/ImageCard';
+import { useState } from 'react';
+
+type FormData = {
+  githubUser: string;
+}
 
 const GitHubSearch = () => {
 
+  const [formData, setFormData] = useState<FormData>({
+    githubUser: ''
+  });
+
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    console.log("Mudou para: " + event.target.value);
+    const name = event.target.name;
+    const value = event.target.value;
+
+    setFormData( { ...formData, [name]: value } );
   };
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
-    console.log("Clicou no botão");
+    console.log(formData);
   };
 
   return (
@@ -24,6 +36,8 @@ const GitHubSearch = () => {
           <div className="form-container">
             <input
               type="text"
+              name="githubUser"
+              value={formData.githubUser}
               className="search-input"
               placeholder="Usuário GitHub"
               onChange={ handleChange }
