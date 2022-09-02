@@ -4,6 +4,8 @@ import ResultCard from 'components/ResultCard';
 import ImageCard from 'components/ImageCard';
 import { useState } from 'react';
 import axios from 'axios';
+import ImageLoader from './ImageLoader';
+import InfoLoader from './InfoLoader';
 
 type FormData = {
   githubUser: string;
@@ -25,6 +27,8 @@ const GitHubSearch = () => {
     githubUser: ''
   });
 
+  const [isLoading, setIsLoading] = useState(false);
+
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const name = event.target.name;
     const value = event.target.value;
@@ -35,12 +39,16 @@ const GitHubSearch = () => {
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
+    setIsLoading(true);
     axios.get(`https://api.github.com/users/${formData.githubUser}`)
       .then((response) => {
         setGitHubInformation(response.data);
       })
       .catch((error) => {
         setGitHubInformation(undefined);
+      })
+      .finally(() => {
+        setIsLoading(false);
       });
   };
 
@@ -66,25 +74,32 @@ const GitHubSearch = () => {
           </div>
         </form>
       </div>
-
-      {gitHubInformation &&
+      
+      {
+        gitHubInformation &&
         <div className="container  github-info-card">
-
-          <div className="github-image-container">
-            <ImageCard url={gitHubInformation?.avatar_url} profileName={gitHubInformation.name} />
-          </div>
+          
+          {
+            isLoading ? <ImageLoader /> :
+            <div className="github-image-container">
+              <ImageCard url={gitHubInformation?.avatar_url} profileName={gitHubInformation.name} />
+            </div>
+          }
 
           <div className="container  github-all-info-container">
             <div className="info-title">
               <h3>Informações</h3>
             </div>
 
-            <div className="github-info-card-detail">
-              <ResultCard title="Perfil" description={gitHubInformation.html_url} link={true} />
-              <ResultCard title="Seguidores" description={gitHubInformation.followers} link={false} />
-              <ResultCard title="Localidade" description={gitHubInformation.location} link={false} />
-              <ResultCard title="Nome" description={gitHubInformation.name} link={false} />
-            </div>
+            {
+              isLoading ? <InfoLoader /> :
+              <div className="github-info-card-detail">
+                <ResultCard title="Perfil" description={gitHubInformation.html_url} link={true} />
+                <ResultCard title="Seguidores" description={gitHubInformation.followers} link={false} />
+                <ResultCard title="Localidade" description={gitHubInformation.location} link={false} />
+                <ResultCard title="Nome" description={gitHubInformation.name} link={false} />
+              </div>
+            }
           </div>
           
         </div>
