@@ -71,7 +71,7 @@ const GitHubSearch = () => {
         <div className="container  github-info-card">
 
           <div className="github-image-container">
-            <ImageCard url={gitHubInformation?.avatar_url} profileName='Prof Nelius' />
+            <ImageCard url={gitHubInformation?.avatar_url} profileName={gitHubInformation.name} />
           </div>
 
           <div className="container  github-all-info-container">
