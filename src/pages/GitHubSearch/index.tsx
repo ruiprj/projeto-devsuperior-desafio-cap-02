@@ -3,12 +3,23 @@ import './styles.css';
 import ResultCard from 'components/ResultCard';
 import ImageCard from 'components/ImageCard';
 import { useState } from 'react';
+import axios from 'axios';
 
 type FormData = {
   githubUser: string;
 }
 
+type GitHubInformation = {
+  avatar_url: string,
+  html_url: string,
+  followers: string,
+  location: string,
+  name: string,
+}
+
 const GitHubSearch = () => {
+
+  const [gitHubInformation, setGitHubInformation] = useState<GitHubInformation>();
 
   const [formData, setFormData] = useState<FormData>({
     githubUser: ''
@@ -24,7 +35,13 @@ const GitHubSearch = () => {
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
-    console.log(formData);
+    axios.get(`https://api.github.com/users/${formData.githubUser}`)
+      .then((response) => {
+        setGitHubInformation(response.data);
+      })
+      .catch((error) => {
+        setGitHubInformation(undefined);
+      });
   };
 
   return (
@@ -50,26 +67,28 @@ const GitHubSearch = () => {
         </form>
       </div>
 
-      <div className="container  github-info-card">
+      {gitHubInformation &&
+        <div className="container  github-info-card">
 
-        <div className="github-image-container">
-          <ImageCard url='https://avatars.githubusercontent.com/u/13897257?v=4' profileName='Prof Nelius' />
-        </div>
-
-        <div className="container  github-all-info-container">
-          <div className="info-title">
-            <h3>Informações</h3>
+          <div className="github-image-container">
+            <ImageCard url={gitHubInformation?.avatar_url} profileName='Prof Nelius' />
           </div>
 
-          <div className="github-info-card-detail">
-            <ResultCard title="Perfil" description="https://github.com/chapolim" link={true} />
-            <ResultCard title="Seguidores" description="234" link={false} />
-            <ResultCard title="Localidade" description="rua q sobe e desce" link={false} />
-            <ResultCard title="Nome" description="Chapolim Colorado" link={false} />
+          <div className="container  github-all-info-container">
+            <div className="info-title">
+              <h3>Informações</h3>
+            </div>
+
+            <div className="github-info-card-detail">
+              <ResultCard title="Perfil" description={gitHubInformation.html_url} link={true} />
+              <ResultCard title="Seguidores" description={gitHubInformation.followers} link={false} />
+              <ResultCard title="Localidade" description={gitHubInformation.location} link={false} />
+              <ResultCard title="Nome" description={gitHubInformation.name} link={false} />
+            </div>
           </div>
+          
         </div>
-        
-      </div>
+      }
     </div>
   );
 };
